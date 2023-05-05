@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { DateTime } from 'luxon'
 import { computed, ref } from 'vue'
-import { today, thisWeek, thisMonth, type TimelinePost } from '../posts'
 import TimelineItem from './TimelineItem.vue'
-import { usePostsStore } from '../stores/posts'
+import { usePosts } from '../stores/posts'
+import type { TimelinePost } from '../posts'
 
-const postsStore = usePostsStore()
+const postsStore = usePosts()
 
 const periods = ['Today', 'This Week', 'This Month'] as const
 
@@ -27,8 +27,12 @@ function onChange(event: Event) {
 }
 
 const posts = computed<TimelinePost[]>(() => {
-  return [today, thisWeek, thisMonth]
-    .map((post) => {
+  return postsStore.ids
+    .map((id) => {
+      const post = postsStore.all.get(id)
+      if (!post) {
+        throw Error(`Post with id of ${id} was expected but not found.`)
+      }
       return {
         ...post,
         created: DateTime.fromISO(post.created)
@@ -49,8 +53,6 @@ const posts = computed<TimelinePost[]>(() => {
 </script>
 
 <template>
-  {{ postsStore.foo }}
-  <button @click="postsStore.updateFoo('bar')">Update</button>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="rounded-lg px-4 py-5 shadow-lg sm:px-6">
       <div>
