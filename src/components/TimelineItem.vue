@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TimelinePost } from '../posts'
+import type { TimelinePost } from '../posts'
 
 defineProps<{
   post: TimelinePost
@@ -7,18 +7,19 @@ defineProps<{
 </script>
 
 <template>
-  <section
-    class="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
-  >
-    <a class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
-      <div class="min-w-0 flex-auto">
-        <a class="text-base font-semibold leading-6 text-gray-900">
+  <div class="flex gap-x-4">
+    <div class="min-w-0 flex-auto">
+      <p class="text-sm font-semibold leading-6 text-gray-900">
+        <a>
+          <span class="absolute inset-x-0 -top-px bottom-0" />
           {{ post.title }}
         </a>
-        <p class="mt-1 flex text-sm leading-5 text-gray-500">
-          {{ post.created.toFormat('d MMM') }}
-        </p>
-      </div>
-    </a>
-  </section>
+      </p>
+      <p class="mt-1 flex text-xs leading-5 text-gray-500">
+        <a class="relative truncate hover:underline">
+          {{ post.created.toFormat('MMMM dd, yyyy') }}
+        </a>
+      </p>
+    </div>
+  </div>
 </template>
