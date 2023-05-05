@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { DateTime } from 'luxon'
+import { computed, ref } from 'vue'
+import { Post, today, thisWeek, thisMonth } from '../posts'
 
 const periods = ['Today', 'This Week', 'This Month'] as const
 
@@ -14,6 +16,27 @@ function isActive(period: Period) {
 function selectPeriod(period: Period) {
   selectedPeriod.value = period
 }
+
+const posts = computed(() => {
+  return [today, thisWeek, thisMonth]
+    .map((post) => {
+      return {
+        ...post,
+        created: DateTime.fromISO(post.created)
+      }
+    })
+    .filter((post) => {
+      if (selectedPeriod.value === 'Today') {
+        return post.created >= DateTime.now().minus({ days: 1 })
+      }
+
+      if (selectedPeriod.value === 'This Week') {
+        return post.created >= DateTime.now().minus({ week: 1 })
+      }
+
+      return post
+    })
+})
 </script>
 
 <template>
@@ -32,4 +55,23 @@ function selectPeriod(period: Period) {
       {{ period }}
     </a>
   </nav>
+
+  <section
+    class="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
+  >
+    <a
+      v-for="post in posts"
+      :key="post.id"
+      class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6"
+    >
+      <div class="min-w-0 flex-auto">
+        <a class="text-base font-semibold leading-6 text-gray-900">
+          {{ post.title }}
+        </a>
+        <p class="mt-1 flex leading-5 text-sm text-gray-500">
+          {{ post.created.toFormat('d MMM') }}
+        </p>
+      </div>
+    </a>
+  </section>
 </template>
