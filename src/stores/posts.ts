@@ -1,3 +1,5 @@
+import { defineStore } from 'pinia'
+import { DateTime } from 'luxon'
 import {
   thisMonth,
   thisWeek,
@@ -5,9 +7,7 @@ import {
   type Post,
   type TimelinePost
 } from '../posts'
-import { defineStore } from 'pinia'
 import type { Period } from '../constants'
-import { DateTime } from 'luxon'
 
 interface PostsState {
   ids: string[]
