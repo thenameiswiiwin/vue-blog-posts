@@ -23,8 +23,8 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0 --cache --cache-location node_modules/.cache/eslint/",
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --cache --cache-location node_modules/.cache/eslint/ --fix",
-    "stylelint": "stylelint src/**/*.{html,vue,sass,scss,less,css} --cache --cache-location node_modules/.cache/stylelint/",
-    "stylelint:fix": "stylelint src/**/*.{html,vue,sass,scss,less,css} --cache --cache-location node_modules/.cache/stylelint/ --fix",
+    "stylelint": "stylelint src/**/*.{html,vue,css} --cache --cache-location node_modules/.cache/stylelint/",
+    "stylelint:fix": "stylelint src/**/*.{html,vue,css} --cache --cache-location node_modules/.cache/stylelint/ --fix",
     "format": "prettier --write src/",
     "commit": "cz",
     "prepare": "husky install"
