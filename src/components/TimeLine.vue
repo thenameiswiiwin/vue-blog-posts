@@ -9,6 +9,8 @@ function onPeriodChange(e: Event) {
   const target = e.target as HTMLInputElement
   postsStore.setSelectedPeriod(target.value as Period)
 }
+
+postsStore.fetchPosts()
 </script>
 
 <template>
