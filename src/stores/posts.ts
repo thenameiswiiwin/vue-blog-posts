@@ -6,8 +6,8 @@ import {
   today,
   type Post,
   type TimelinePost
-} from '../posts'
-import type { Period } from '../constants'
+} from '@/posts'
+import type { Period } from '@/constants'
 
 interface PostsState {
   ids: string[]
