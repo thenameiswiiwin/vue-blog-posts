@@ -37,7 +37,10 @@ module.exports = {
     'keyframes-name-pattern': null,
     'selector-class-pattern': null,
     'value-no-vendor-prefix': null,
-    'rule-empty-line-before': ['always', { ignore: ['after-comment', 'first-nested'] }]
+    'rule-empty-line-before': [
+      'always',
+      { ignore: ['after-comment', 'first-nested'] }
+    ]
   },
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
   overrides: [
@@ -45,7 +48,10 @@ module.exports = {
       files: ['*.vue', '**/*.vue', '*.html', '**/*.html'],
       customSyntax: 'postcss-html',
       rules: {
-        'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
+        'selector-pseudo-class-no-unknown': [
+          true,
+          { ignorePseudoClasses: ['deep', 'global'] }
+        ],
         'selector-pseudo-element-no-unknown': [
           true,
           { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'] }
