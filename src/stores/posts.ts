@@ -1,13 +1,7 @@
 import { defineStore } from 'pinia'
 import { DateTime } from 'luxon'
-import {
-  thisMonth,
-  thisWeek,
-  today,
-  type Post,
-  type TimelinePost
-} from '@/posts'
 import type { Period } from '@/constants'
+import type { Post, TimelinePost } from '@/posts'
 
 interface PostsState {
   ids: string[]
@@ -16,7 +10,9 @@ interface PostsState {
 }
 
 function delay() {
-  return new Promise<void>((res) => setTimeout(res, 1500))
+  return new Promise<void>((res) => {
+    setTimeout(res, 1500)
+  })
 }
 
 export const usePosts = defineStore('posts', {

@@ -10,7 +10,7 @@ function onPeriodChange(e: Event) {
   postsStore.setSelectedPeriod(target.value as Period)
 }
 
-postsStore.fetchPosts()
+await postsStore.fetchPosts()
 </script>
 
 <template>
