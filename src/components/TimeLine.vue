@@ -14,8 +14,8 @@ await postsStore.fetchPosts()
 </script>
 
 <template>
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="rounded-lg px-4 py-5 shadow-lg sm:px-6">
+  <div>
+    <div class="rounded-lg px-4 py-5 shadow-lg sm:px-6 sm:py-2">
       <div>
         <div class="sm:hidden">
           <label for="periods" class="sr-only">Select a period</label>
