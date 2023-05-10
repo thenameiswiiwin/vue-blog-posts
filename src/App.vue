@@ -6,11 +6,11 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue'
 <template>
   <div class="overflow-hidden rounded-lg bg-white">
     <Suspense>
-      <template #default>
+      <template #fallback>
         <TimeLine />
       </template>
 
-      <template #fallback>
+      <template #default>
         <LoadingSpinner />
       </template>
     </Suspense>

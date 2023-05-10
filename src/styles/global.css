@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .animation-delay {
+    animation-delay: calc(2000ms * 0.1 * var(--i));
+  }
+}

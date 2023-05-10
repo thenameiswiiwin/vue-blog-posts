@@ -1,84 +1,22 @@
+<script setup lang="ts">
+const rings = [
+  '--ring-spacing: 0; --ring-index: 5; --i: 4;',
+  '--ring-spacing: 1; --ring-index: 4; --i: 3;',
+  '--ring-spacing: 2; --ring-index: 3; --i: 2;',
+  '--ring-spacing: 3; --ring-index: 2; --i: 1;',
+  '--ring-spacing: 4; --ring-index: 1; --i: 0;'
+] as const
+</script>
+
 <template>
   <div class="flex h-screen items-center justify-center">
-    <div class="relative h-[65px] w-[65px]">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
+    <div class="relative h-16 w-16">
+      <div
+        v-for="ring in rings"
+        class="animation-delay absolute left-ring-tl top-ring-tl z-[var(--ring-index)] h-ring-hw w-ring-hw animate-spinning rounded-full border-[calc(65px_*_0.05)] border-l-green-500 border-t-green-500"
+        :key="ring"
+        :style="ring"
+      ></div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.semipolar-spinner,
-.semipolar-spinner * {
-  box-sizing: border-box;
-}
-
-.semipolar-spinner {
-  position: relative;
-  width: 65px;
-  height: 65px;
-}
-
-.semipolar-spinner .ring {
-  position: absolute;
-  border: calc(65px * 0.05) solid transparent;
-  border-top-color: #ff1d5e;
-  border-left-color: #ff1d5e;
-  border-radius: 50%;
-  animation: semipolar-spinner-animation 2s infinite;
-}
-
-.semipolar-spinner .ring:nth-child(1) {
-  top: calc(65px * 0.1 * 0);
-  left: calc(65px * 0.1 * 0);
-  z-index: 5;
-  width: calc(65px - 65px * 0.2 * 0);
-  height: calc(65px - 65px * 0.2 * 0);
-  animation-delay: calc(2000ms * 0.1 * 4);
-}
-
-.semipolar-spinner .ring:nth-child(2) {
-  top: calc(65px * 0.1 * 1);
-  left: calc(65px * 0.1 * 1);
-  z-index: 4;
-  width: calc(65px - 65px * 0.2 * 1);
-  height: calc(65px - 65px * 0.2 * 1);
-  animation-delay: calc(2000ms * 0.1 * 3);
-}
-
-.semipolar-spinner .ring:nth-child(3) {
-  top: calc(65px * 0.1 * 2);
-  left: calc(65px * 0.1 * 2);
-  z-index: 3;
-  width: calc(65px - 65px * 0.2 * 2);
-  height: calc(65px - 65px * 0.2 * 2);
-  animation-delay: calc(2000ms * 0.1 * 2);
-}
-
-.semipolar-spinner .ring:nth-child(4) {
-  top: calc(65px * 0.1 * 3);
-  left: calc(65px * 0.1 * 3);
-  z-index: 2;
-  width: calc(65px - 65px * 0.2 * 3);
-  height: calc(65px - 65px * 0.2 * 3);
-  animation-delay: calc(2000ms * 0.1 * 1);
-}
-
-.semipolar-spinner .ring:nth-child(5) {
-  top: calc(65px * 0.1 * 4);
-  left: calc(65px * 0.1 * 4);
-  z-index: 1;
-  width: calc(65px - 65px * 0.2 * 4);
-  height: calc(65px - 65px * 0.2 * 4);
-  animation-delay: calc(2000ms * 0.1 * 0);
-}
-
-@keyframes semipolar-spinner-animation {
-  50% {
-    transform: rotate(360deg) scale(0.7);
-  }
-}
-</style>
