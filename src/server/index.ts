@@ -1,6 +1,6 @@
-import express from 'express'
-import cors from 'cors'
-import bodyParser from 'body-parser'
+import * as express from 'express'
+import * as cors from 'cors'
+import * as bodyParser from 'body-parser'
 import { thisMonth, thisWeek, today, type Post } from '../posts'
 
 const app = express()
@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 const allPosts = [today, thisWeek, thisMonth]
 
 app.get('/posts', (req, res) => {
-  res.json([today, thisWeek, thisMonth])
+  res.json(allPosts)
 })
 
 app.post<{}, {}, Post>('/posts', (req, res) => {

@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
 import debounce from 'lodash/debounce'
+import { useRouter } from 'vue-router'
 import type { TimelinePost } from '@/posts'
 import { usePosts } from '@/stores/posts'
 
@@ -16,6 +17,7 @@ const html = ref('')
 const contentEditable = ref<HTMLDivElement>()
 
 const posts = usePosts()
+const router = useRouter()
 
 function parseHtml(markdown: string) {
   marked.parse(
@@ -55,19 +57,20 @@ function handleInput() {
   content.value = contentEditable.value?.innerText ?? ''
 }
 
-function handleSubmit() {
+async function handleClick() {
   const newPost: TimelinePost = {
     ...props.post,
     title: title.value,
     markdown: content.value,
     html: html.value
   }
-  posts.createPost(newPost)
+  await posts.createPost(newPost)
+  router.push('/')
 }
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit">
+  <div>
     <div>
       <div class="border-b border-gray-900/10 pb-12">
         <h2 class="text-base font-semibold leading-7 text-gray-900">
@@ -125,9 +128,10 @@ function handleSubmit() {
       <button
         type="submit"
         class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+        @click="handleClick"
       >
         Save Post
       </button>
     </div>
-  </form>
+  </div>
 </template>
