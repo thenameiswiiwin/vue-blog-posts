@@ -6,7 +6,8 @@ import type { TimelinePost } from '@/posts'
 const post: TimelinePost = {
   id: '-1',
   title: 'Title',
-  created: DateTime.now()
+  created: DateTime.now(),
+  markdown: '## Title'
 }
 </script>
 
