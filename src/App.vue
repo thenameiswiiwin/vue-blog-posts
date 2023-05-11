@@ -10,3 +10,30 @@ import NavBar from '@/components/NavBar.vue'
     </div>
   </div>
 </template>
+
+<style>
+@import 'highlight.js/styles/tokyo-night-dark.css';
+
+ul {
+  list-style: revert !important;
+  list-style-type: inside !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 10px 0 !important;
+  font-size: revert !important;
+}
+
+pre {
+  margin: 10px 0 !important;
+}
+
+p {
+  margin: 10px 0 !important;
+}
+</style>

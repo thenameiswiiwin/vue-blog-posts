@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue'
 import { marked } from 'marked'
+import hljs from 'highlight.js'
 import type { TimelinePost } from '@/posts'
 
 const props = defineProps<{
@@ -15,9 +16,19 @@ const contentEditable = ref<HTMLDivElement>()
 watch(
   content,
   (newContent) => {
-    marked.parse(newContent, (err, parseResult) => {
-      html.value = parseResult
-    })
+    marked.parse(
+      newContent,
+      {
+        gfm: true,
+        breaks: true,
+        highlight: (code) => {
+          return hljs.highlightAuto(code).value
+        }
+      },
+      (err, parseResult) => {
+        html.value = parseResult
+      }
+    )
   },
   { immediate: true }
 )
@@ -33,7 +44,7 @@ function handleInput() {
   if (!contentEditable.value) {
     throw Error('ContentEditable DOM node was not found')
   }
-  content.value = contentEditable.value?.innerHTML ?? ''
+  content.value = contentEditable.value?.innerText ?? ''
 }
 </script>
 
@@ -45,8 +56,8 @@ function handleInput() {
           New Post
         </h2>
 
-        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="col-span-full">
+        <div class="mt-6 flex flex-col gap-x-6 gap-y-8">
+          <div>
             <label
               for="username"
               class="block text-sm font-medium leading-6 text-gray-900"
@@ -68,20 +79,16 @@ function handleInput() {
             </div>
           </div>
 
-          <div class="col-span-full">
-            <label
-              for="content"
-              class="block text-sm font-medium leading-6 text-gray-900"
-              >Content</label
-            >
-            <div class="mt-2 flex">
+          <div>
+            <div class="grid grid-cols-2">
               <div
+                id="content"
+                name="content"
                 contenteditable
                 ref="contentEditable"
-                class="flex-1"
                 @input="handleInput"
               />
-              <div class="flex-1">
+              <div>
                 <div v-html="html" />
               </div>
             </div>
