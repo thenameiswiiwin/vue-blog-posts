@@ -15,7 +15,7 @@ function delay() {
   })
 }
 
-export const usePosts = defineStore('posts', {
+export const usePostsStores = defineStore('posts', {
   state: (): PostsState => ({
     ids: [],
     all: new Map(),

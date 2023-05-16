@@ -5,7 +5,7 @@ import hljs from 'highlight.js'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'vue-router'
 import type { TimelinePost } from '@/posts'
-import { usePosts } from '@/stores/posts'
+import { usePostsStores } from '@/stores/postsStores'
 
 const props = defineProps<{
   post: TimelinePost
@@ -16,7 +16,7 @@ const content = ref(props.post.markdown)
 const html = ref('')
 const contentEditable = ref<HTMLDivElement>()
 
-const posts = usePosts()
+const posts = usePostsStores()
 const router = useRouter()
 
 function parseHtml(markdown: string) {

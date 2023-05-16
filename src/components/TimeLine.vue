@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import TimelineItem from './TimelineItem.vue'
 import { periods, type Period } from '@/constants'
-import { usePosts } from '@/stores/posts'
+import { usePostsStores } from '@/stores/postsStores'
 
-const postsStore = usePosts()
+const postsStore = usePostsStores()
 
 function onPeriodChange(e: Event) {
   const target = e.target as HTMLInputElement
