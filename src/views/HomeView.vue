@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import TimeLine from '@/components/TimeLine.vue'
-import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import Timeline from '@/components/Timeline.vue'
+import Spinner from '@/components/Spinner.vue'
 </script>
 
 <template>
   <Suspense>
     <template #default>
-      <TimeLine />
+      <Timeline />
     </template>
 
     <template #fallback>
-      <LoadingSpinner />
+      <Spinner />
     </template>
   </Suspense>
 </template>

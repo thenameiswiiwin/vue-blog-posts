@@ -66,6 +66,7 @@ module.exports = {
     'rest-spread-spacing': 'error',
     'prefer-const': 'error',
     'arrow-spacing': 'error',
-    'prefer-destructuring': ['error', { object: true, array: false }]
+    'prefer-destructuring': ['error', { object: true, array: false }],
+    'vue/multi-word-component-names': 0
   }
 }
