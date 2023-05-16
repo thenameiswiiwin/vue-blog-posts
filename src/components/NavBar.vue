@@ -14,4 +14,6 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
       </RouterLink>
     </div>
   </div>
+
+  <Teleport to="#modal">Content to be rendered. </Teleport>
 </template>
