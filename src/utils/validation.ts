@@ -5,7 +5,20 @@ interface Status {
 
 type Rule = (value: string) => Status
 
-export function required(value: string): Status {
+export function length({ min, max }: { min: number; max: number }): Rule {
+  return (value: string): Status => {
+    const result = Boolean(value.length > min && value.length < max)
+
+    return {
+      valid: result,
+      message: result
+        ? undefined
+        : `This field must be between ${min} and ${max}`
+    }
+  }
+}
+
+export const required: Rule = (value: string): Status => {
   const result = Boolean(value)
 
   return {
@@ -27,4 +40,8 @@ export function validate(value: string, rules: Rule[]): Status {
   }
 }
 
-console.log(validate('', [required]), validate('username', [required]))
+console.log(
+  validate('a', [length({ min: 5, max: 10 })]),
+  validate('aaaaaaaaaaa', [length({ min: 5, max: 10 })]),
+  validate('username', [length({ min: 5, max: 10 })])
+)
