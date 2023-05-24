@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import FormInput from '@/components/FormInput.vue'
 import { validate, length, required } from '@/utils/validation'
 import type { NewUser } from '@/utils/users'
-import { useUsers } from '@/stores/users'
+import { useUsers } from '@/stores/usersStore'
 import { useModal } from '@/composables/modal'
 
 const username = ref('')
@@ -57,11 +57,13 @@ async function handleSubmit() {
         <FormInput
           name="Username"
           v-model="username"
+          type="text"
           :status="usernameStatus"
         />
         <FormInput
           name="Password"
           v-model="password"
+          type="password"
           :status="passwordStatus"
         />
         <button
