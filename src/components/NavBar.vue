@@ -27,5 +27,16 @@ const modal = useModal()
     </div>
   </div>
 
-  <Teleport to="#modal"> Modal content here. </Teleport>
+  <Teleport to="#modal">
+    Modal content here.
+    <div class="flex justify-center">
+      <button
+        type="button"
+        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+        @click="modal.hideModal()"
+      >
+        Close
+      </button>
+    </div>
+  </Teleport>
 </template>
