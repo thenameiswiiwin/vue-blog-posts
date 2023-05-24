@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TimelineItem from './TimelineItem.vue'
-import { periods, type Period } from '@/constants'
+import { periods, type Period } from '@/utils/constants'
 import { usePostsStores } from '@/stores/postsStores'
 
 const postsStore = usePostsStores()

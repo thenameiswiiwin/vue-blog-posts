@@ -4,7 +4,7 @@ import { marked } from 'marked'
 import hljs from 'highlight.js'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'vue-router'
-import type { TimelinePost } from '@/posts'
+import type { TimelinePost } from '@/utils/posts'
 import { usePostsStores } from '@/stores/postsStores'
 
 const props = defineProps<{
