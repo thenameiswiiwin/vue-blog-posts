@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { DateTime } from 'luxon'
-import type { Period } from '@/constants'
-import type { Post, TimelinePost } from '@/posts'
+import type { Period } from '@/utils/constants'
+import type { Post, TimelinePost } from '@/utils/posts'
 
 interface PostsState {
   ids: string[]
@@ -31,7 +31,7 @@ export const usePostsStores = defineStore('posts', {
     },
 
     async fetchPosts() {
-      const res = await window.fetch('http://localhost:8000/posts')
+      const res = await window.fetch('/api/posts')
       const data = (await res.json()) as Post[]
       await delay()
 
@@ -48,7 +48,7 @@ export const usePostsStores = defineStore('posts', {
 
     createPost(post: TimelinePost) {
       const body = JSON.stringify({ ...post, created: post.created.toISO() })
-      return window.fetch('http://localhost:8000/posts', {
+      return window.fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
