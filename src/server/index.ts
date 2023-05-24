@@ -19,7 +19,7 @@ app.get('/posts', (req, res) => {
   res.json(allPosts)
 })
 
-app.post<{}, {}, Post>('/posts', (req, res) => {
+app.post<{}, {}, Post>('/posts', (req: Request, res: Response) => {
   const post = { ...req.body, id: (Math.random() * 100000).toFixed() }
   allPosts.push(post)
   res.json(post)
@@ -36,7 +36,17 @@ function authenicate(id: string, req: Request, res: Response) {
   res.cookie(COOKIE, token, { httpOnly: true })
 }
 
-app.post<{}, {}, NewUser>('/users', (req, res) => {
+app.get('/current-user', (req: Request, res: Response) => {
+  try {
+    const token = req.cookies[COOKIE]
+    const result = jsonwebtoken.verify(token, TOKEN) as { id: string }
+    res.json({ id: result.id })
+  } catch (e) {
+    res.status(404).end()
+  }
+})
+
+app.post<{}, {}, NewUser>('/users', (req: Request, res: Response) => {
   const user: User = { ...req.body, id: (Math.random() * 100000).toFixed() }
   allUsers.push(user)
   authenicate(user.id, req, res)
