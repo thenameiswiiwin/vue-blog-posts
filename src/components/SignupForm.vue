@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import FormInput from '@/components/FormInput.vue'
 import { validate, length, required } from '@/utils/validation'
+import { NewUser } from '@/utils/users'
 
 const username = ref('')
 const usernameStatus = computed(() => {
@@ -12,6 +13,20 @@ const password = ref('')
 const passwordStatus = computed(() => {
   return validate(password.value, [required, length({ min: 10, max: 40 })])
 })
+
+const isInvalid = computed(() => {
+  return !usernameStatus.value.valid || !passwordStatus.value.valid
+})
+
+function handleSubmit() {
+  if (isInvalid.value) return
+  const newUser: NewUser = {
+    username: username.value,
+    password: password.value
+  }
+
+  console.log(newUser)
+}
 </script>
 
 <template>
@@ -27,7 +42,7 @@ const passwordStatus = computed(() => {
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" @submit.prevent="handleSubmit">
         <FormInput
           name="Username"
           v-model="username"
@@ -38,14 +53,14 @@ const passwordStatus = computed(() => {
           v-model="password"
           :status="passwordStatus"
         />
-        <div>
-          <button
-            type="submit"
-            class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-          >
-            Sign up
-          </button>
-        </div>
+        <button
+          type="submit"
+          class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 disabled:opacity-25 disabled:focus:outline-none"
+          :disabled="isInvalid"
+          @submit="handleSubmit"
+        >
+          Sign up
+        </button>
       </form>
     </div>
   </div>
