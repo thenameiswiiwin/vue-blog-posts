@@ -16,6 +16,14 @@ const usersStore = useUsers()
       class="flex justify-end gap-2 pb-4 pt-8"
     >
       <div class="shrink-0">
+        <RouterLink to="/posts/new">
+          <Button type="button" size="small" intent="primary">
+            <PlusIcon class="-ml-0.5 h-5 w-5" aria-hidden="true" />
+            New Post
+          </Button>
+        </RouterLink>
+      </div>
+      <div class="shrink-0">
         <Button
           type="button"
           size="small"
@@ -24,14 +32,6 @@ const usersStore = useUsers()
         >
           Log Out
         </Button>
-      </div>
-      <div class="shrink-0">
-        <RouterLink to="/posts/new">
-          <Button type="button" size="small" intent="primary">
-            <PlusIcon class="-ml-0.5 h-5 w-5" aria-hidden="true" />
-            New Post
-          </Button>
-        </RouterLink>
       </div>
     </div>
     <div v-else class="flex justify-end gap-2 pb-4 pt-8">
@@ -42,16 +42,11 @@ const usersStore = useUsers()
           intent="secondary"
           @click="modal.showModal()"
         >
-          Sign In
+          Sign Up
         </Button>
       </div>
       <div class="shrink-0">
-        <RouterLink to="/posts/new">
-          <Button type="button" size="small" intent="primary">
-            <PlusIcon class="-ml-0.5 h-5 w-5" aria-hidden="true" />
-            New Post
-          </Button>
-        </RouterLink>
+        <Button type="button" size="small" intent="primary"> Sign In </Button>
       </div>
     </div>
   </nav>

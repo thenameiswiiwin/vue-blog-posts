@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { cva, type VariantProps } from 'class-variance-authority'
 
+type ButtonProps = Required<VariantProps<typeof button>>
+
+defineProps<{ intent: ButtonProps['intent']; size: ButtonProps['size'] }>()
+
 const button = cva(
   'relative inline-flex items-center gap-x-1.5 rounded-md border-2 border-green-600 text-sm font-semibold shadow-sm transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600',
   {
@@ -26,10 +30,6 @@ const button = cva(
     }
   }
 )
-
-type ButtonProps = Required<VariantProps<typeof button>>
-
-defineProps<{ intent: ButtonProps['intent']; size: ButtonProps['size'] }>()
 </script>
 
 <template>

@@ -19,15 +19,17 @@ export const useUsers = defineStore('users', {
       const result = await res.json()
       this.currentUserId = result.id
     },
-    createUser(newUser: NewUser) {
+
+    async createUser(newUser: NewUser) {
       const body = JSON.stringify(newUser)
-      return window.fetch('/api/users', {
+      await window.fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body
       })
+      return this.authenticate()
     }
   }
 })
