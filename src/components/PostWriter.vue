@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce'
 import { useRouter } from 'vue-router'
 import type { TimelinePost } from '@/utils/posts'
 import { usePostsStores } from '@/stores/postsStores'
-import Button from '@/components/Button.vue'
+import Button from './Button.vue'
 
 const props = defineProps<{
   post: TimelinePost

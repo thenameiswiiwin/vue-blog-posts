@@ -2,7 +2,7 @@
 import { PlusIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { useModal } from '@/composables/modal'
 import { useUsers } from '@/stores/usersStore'
-import Button from '@/components/Button.vue'
+import Button from './Button.vue'
 
 const modal = useModal()
 const usersStore = useUsers()
