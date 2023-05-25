@@ -1,17 +1,11 @@
 <script lang="ts" setup>
 import NavBar from '@/components/NavBar.vue'
 import Modal from '@/components/Modal.vue'
+import { useUsers } from './stores/usersStore'
 
-async function authenticate() {
-  const res = await window.fetch('/api/current-user', {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  console.log(await res.json())
-}
+const usersStore = useUsers()
 
-authenticate()
+usersStore.authenticate()
 </script>
 
 <template>

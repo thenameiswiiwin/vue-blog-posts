@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import FormInput from '@/components/FormInput.vue'
+import Button from '@/components/Button.vue'
 import { validate, length, required } from '@/utils/validation'
 import type { NewUser } from '@/utils/users'
 import { useUsers } from '@/stores/usersStore'
@@ -66,14 +67,15 @@ async function handleSubmit() {
           type="password"
           :status="passwordStatus"
         />
-        <button
+        <Button
           type="submit"
-          class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 disabled:opacity-25 disabled:focus:outline-none"
+          size="medium"
+          intent="tertiary"
           :disabled="isInvalid"
           @submit="handleSubmit"
         >
           Sign up
-        </button>
+        </Button>
       </form>
     </div>
   </div>

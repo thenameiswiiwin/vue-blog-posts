@@ -31,6 +31,7 @@ function handleInput(e: Event) {
         name="name"
         aria-invalid="true"
         aria-describedby="username-error"
+        autocomplete="on"
         :id="name"
         :value="modelValue"
         :type="type"

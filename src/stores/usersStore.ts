@@ -1,8 +1,24 @@
 import { defineStore } from 'pinia'
 import type { NewUser } from '@/utils/users'
 
+interface UsersState {
+  currentUserId?: string
+}
+
 export const useUsers = defineStore('users', {
+  state: (): UsersState => ({
+    currentUserId: undefined
+  }),
   actions: {
+    async authenticate() {
+      const res = await window.fetch('/api/current-user', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await res.json()
+      this.currentUserId = result.id
+    },
     createUser(newUser: NewUser) {
       const body = JSON.stringify(newUser)
       return window.fetch('/api/users', {

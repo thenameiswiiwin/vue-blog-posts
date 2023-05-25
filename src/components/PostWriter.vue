@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce'
 import { useRouter } from 'vue-router'
 import type { TimelinePost } from '@/utils/posts'
 import { usePostsStores } from '@/stores/postsStores'
+import Button from '@/components/Button.vue'
 
 const props = defineProps<{
   post: TimelinePost
@@ -118,17 +119,20 @@ async function handleClick() {
       </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-end gap-x-6">
-      <RouterLink to="/" class="text-sm font-semibold leading-6 text-gray-900">
-        Cancel
+    <div class="mt-6 flex items-center justify-end gap-2">
+      <RouterLink to="/">
+        <Button
+          type="button"
+          size="small"
+          intent="secondary"
+          class="text-gray-900"
+        >
+          Cancel
+        </Button>
       </RouterLink>
-      <button
-        type="submit"
-        class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-        @click="handleClick"
-      >
+      <Button type="submit" size="small" intent="primary" @click="handleClick">
         Save Post
-      </button>
+      </Button>
     </div>
   </div>
 </template>
