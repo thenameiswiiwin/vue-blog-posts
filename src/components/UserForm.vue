@@ -7,6 +7,10 @@ import type { NewUser } from '@/utils/users'
 import { useUsers } from '@/stores/usersStore'
 import { useModal } from '@/composables/modal'
 
+defineProps<{
+  error?: string
+}>()
+
 const emit = defineEmits<{
   (event: 'submit', payload: NewUser): void
 }>()
@@ -69,6 +73,9 @@ async function handleSubmit() {
           type="password"
           :status="passwordStatus"
         />
+        <div v-if="error" class="mt-2 text-sm text-red-600">
+          {{ error }}
+        </div>
         <Button
           type="submit"
           size="medium"
