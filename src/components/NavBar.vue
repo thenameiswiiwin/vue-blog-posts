@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { PlusIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { useModal } from '@/composables/modal'
-import SignupForm from '@/components/SignupForm.vue'
 import { useUsers } from '@/stores/usersStore'
 import Button from '@/components/Button.vue'
 
@@ -40,13 +39,20 @@ const usersStore = useUsers()
           type="button"
           size="small"
           intent="secondary"
-          @click="modal.showModal()"
+          @click="modal.showModal('signUp')"
         >
           Sign Up
         </Button>
       </div>
       <div class="shrink-0">
-        <Button type="button" size="small" intent="primary"> Sign In </Button>
+        <Button
+          type="button"
+          size="small"
+          intent="primary"
+          @click="modal.showModal('signIn')"
+        >
+          Sign In
+        </Button>
       </div>
     </div>
   </nav>
@@ -64,7 +70,7 @@ const usersStore = useUsers()
           <XMarkIcon class="h-6 w-6" aria-hidden="true" />
         </Button>
       </div>
-      <SignupForm />
+      <component :is="modal.component.value" />
     </div>
   </Teleport>
 </template>
