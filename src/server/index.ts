@@ -46,6 +46,11 @@ app.get('/current-user', (req: Request, res: Response) => {
   }
 })
 
+app.post('/logout', (req: Request, res: Response) => {
+  res.cookie(COOKIE, '', { httpOnly: true })
+  res.status(200).end()
+})
+
 app.post<{}, {}, NewUser>('/users', (req: Request, res: Response) => {
   const user: User = { ...req.body, id: (Math.random() * 100000).toFixed() }
   allUsers.push(user)

@@ -28,7 +28,7 @@ const usersStore = useUsers()
           type="button"
           size="small"
           intent="secondary"
-          @click="modal.showModal()"
+          @click="usersStore.logout()"
         >
           Log Out
         </Button>
