@@ -2,9 +2,12 @@
 import { useRoute } from 'vue-router'
 import { usePostsStores } from '@/stores/postsStores'
 import Button from '@/components/Button.vue'
+import { useUsers } from '@/stores/usersStore'
+import { computed } from 'vue'
 
 const route = useRoute()
 const postsStore = usePostsStores()
+const usersStore = useUsers()
 
 const id = route.params.id as string
 const post = postsStore.all.get(id)
@@ -12,6 +15,18 @@ const post = postsStore.all.get(id)
 if (!post) {
   throw Error(`Post with id ${id} not found`)
 }
+
+const canEdit = computed(() => {
+  if (!usersStore.currentUserId) {
+    return false
+  }
+
+  if (usersStore.currentUserId !== post.authorId) {
+    return false
+  }
+
+  return true
+})
 </script>
 
 <template>
@@ -39,7 +54,7 @@ if (!post) {
           Cancel
         </Button>
       </RouterLink>
-      <RouterLink :to="`/posts/${post.id}/edit`">
+      <RouterLink v-if="canEdit" :to="`/posts/${post.id}/edit`">
         <Button type="submit" size="small" intent="primary"> Edit Post </Button>
       </RouterLink>
     </div>
