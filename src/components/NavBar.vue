@@ -1,11 +1,18 @@
 <script lang="ts" setup>
 import { PlusIcon, XMarkIcon } from '@heroicons/vue/20/solid'
+import { useRouter } from 'vue-router'
 import { useModal } from '@/composables/modal'
 import { useUsers } from '@/stores/usersStore'
 import Button from './Button.vue'
 
 const modal = useModal()
 const usersStore = useUsers()
+const router = useRouter()
+
+async function logout() {
+  await usersStore.logout()
+  router.push({ path: '/' })
+}
 </script>
 
 <template>
@@ -23,12 +30,7 @@ const usersStore = useUsers()
         </RouterLink>
       </div>
       <div class="shrink-0">
-        <Button
-          type="button"
-          size="small"
-          intent="secondary"
-          @click="usersStore.logout()"
-        >
+        <Button type="button" size="small" intent="secondary" @click="logout()">
           Log Out
         </Button>
       </div>

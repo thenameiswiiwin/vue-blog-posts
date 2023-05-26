@@ -1,12 +1,13 @@
 # TODO
 
 ## [] Authorization
-- user authorization
+- [] navigation guard
+- [] user authorization
 ## [] Features
-- showing posts
-- edit posts
-- conditonal editing posts
+- [] showing posts
+- [] edit posts
+- [] conditonal editing posts
 ## [] Production
 ## Testing
-- unit tests (vitest)
-- integration test (cyrpress)
+- [] unit tests (vitest)
+- [] integration test (cyrpress)
