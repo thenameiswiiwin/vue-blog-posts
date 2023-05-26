@@ -4,11 +4,11 @@ import FormInput from './FormInput.vue'
 import Button from './Button.vue'
 import { validate, length, required } from '@/utils/validation'
 import type { NewUser } from '@/utils/users'
-import { useUsers } from '@/stores/usersStore'
-import { useModal } from '@/composables/modal'
 
 defineProps<{
   error?: string
+  heading: string
+  show?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -29,9 +29,6 @@ const isInvalid = computed(() => {
   return !usernameStatus.value.valid || !passwordStatus.value.valid
 })
 
-const usersStore = useUsers()
-const modal = useModal()
-
 async function handleSubmit() {
   if (isInvalid.value) return
   const newUser: NewUser = {
@@ -43,6 +40,7 @@ async function handleSubmit() {
     emit('submit', newUser)
   } catch (e) {
     // TODO: handle error
+    console.log(e)
   }
 }
 </script>
@@ -55,7 +53,7 @@ async function handleSubmit() {
       <h2
         class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
       >
-        Sign up to your account
+        {{ heading }} to your account
       </h2>
     </div>
 
@@ -65,12 +63,14 @@ async function handleSubmit() {
           name="Username"
           v-model="username"
           type="text"
+          :show="show"
           :status="usernameStatus"
         />
         <FormInput
           name="Password"
           v-model="password"
           type="password"
+          :show="show"
           :status="passwordStatus"
         />
         <div v-if="error" class="mt-2 text-sm text-red-600">
@@ -83,7 +83,7 @@ async function handleSubmit() {
           :disabled="isInvalid"
           @submit="handleSubmit"
         >
-          Sign up
+          {{ heading }}
         </Button>
       </form>
     </div>

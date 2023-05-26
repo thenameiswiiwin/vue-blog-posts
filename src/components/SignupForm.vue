@@ -14,5 +14,5 @@ async function handleSignup(newUser: NewUser) {
 </script>
 
 <template>
-  <UserForm @submit="handleSignup" />
+  <UserForm heading="Sign up" @submit="handleSignup" :show="true" />
 </template>

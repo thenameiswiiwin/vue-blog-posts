@@ -51,11 +51,24 @@ app.post('/logout', (req: Request, res: Response) => {
   res.status(200).end()
 })
 
+app.post<{}, {}, NewUser>('/login', (req: Request, res: Response) => {
+  const targetUser = allUsers.find(
+    (user) => user.username === req.body.username
+  )
+
+  if (!targetUser || targetUser.password !== req.body.password) {
+    res.status(401).end()
+  } else {
+    authenicate(targetUser.id, req, res)
+    res.status(200).end()
+  }
+})
+
 app.post<{}, {}, NewUser>('/users', (req: Request, res: Response) => {
   const user: User = { ...req.body, id: (Math.random() * 100000).toFixed() }
   allUsers.push(user)
   authenicate(user.id, req, res)
-  const { password, ...rest } = user
+  const { ...rest } = user
   res.json(rest)
 })
 

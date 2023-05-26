@@ -5,8 +5,9 @@ import type { Status } from '@/utils/validation'
 defineProps<{
   name: string
   modelValue: string
-  status: Status
   type: string
+  show?: boolean
+  status: Status
 }>()
 
 const emit = defineEmits<{
@@ -51,7 +52,7 @@ function handleInput(e: Event) {
     <p
       class="mt-2 text-sm text-red-600"
       id="username-error"
-      v-if="!status.valid"
+      v-if="!status.valid && show"
     >
       {{ status.message }}
     </p>

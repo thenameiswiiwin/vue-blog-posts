@@ -28,5 +28,5 @@ async function handleSignin(newUser: NewUser) {
 </script>
 
 <template>
-  <UserForm @submit="handleSignin" :error="error" />
+  <UserForm heading="Sign in" @submit="handleSignin" :error="error" />
 </template>
