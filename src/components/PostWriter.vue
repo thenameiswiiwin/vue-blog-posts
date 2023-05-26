@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce'
 import { useRouter } from 'vue-router'
 import type { Post, TimelinePost } from '@/utils/posts'
 import { usePostsStores } from '@/stores/postsStores'
+import { useUsers } from '@/stores/usersStore'
 import Button from './Button.vue'
 
 const props = defineProps<{
@@ -19,6 +20,7 @@ const contentEditable = ref<HTMLDivElement>()
 
 const posts = usePostsStores()
 const router = useRouter()
+const usersStore = useUsers()
 
 function parseHtml(markdown: string) {
   marked.parse(
@@ -59,9 +61,18 @@ function handleInput() {
 }
 
 async function handleClick() {
-  const newPost: TimelinePost = {
+  if (!usersStore.currentUserId) {
+    throw Error('User is not logged in')
+  }
+
+  const newPost: Post = {
     ...props.post,
+    created:
+      typeof props.post.created === 'string'
+        ? props.post.created
+        : props.post.created.toISO(),
     title: title.value,
+    authorId: usersStore.currentUserId,
     markdown: content.value,
     html: html.value
   }
