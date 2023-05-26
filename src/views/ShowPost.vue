@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 import { usePostsStores } from '@/stores/postsStores'
 import Button from '@/components/Button.vue'
 import { useUsers } from '@/stores/usersStore'
-import { computed } from 'vue'
 
 const route = useRoute()
 const postsStore = usePostsStores()

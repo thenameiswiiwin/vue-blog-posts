@@ -3,9 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
 import debounce from 'lodash/debounce'
-import { useRouter } from 'vue-router'
 import type { Post, TimelinePost } from '@/utils/posts'
-import { usePostsStores } from '@/stores/postsStores'
 import { useUsers } from '@/stores/usersStore'
 import Button from './Button.vue'
 
@@ -13,13 +11,15 @@ const props = defineProps<{
   post: TimelinePost | Post
 }>()
 
+const emit = defineEmits<{
+  (event: 'submit', post: Post): void
+}>()
+
 const title = ref(props.post.title)
 const content = ref(props.post.markdown)
 const html = ref('')
 const contentEditable = ref<HTMLDivElement>()
 
-const posts = usePostsStores()
-const router = useRouter()
 const usersStore = useUsers()
 
 function parseHtml(markdown: string) {
@@ -76,8 +76,7 @@ async function handleClick() {
     markdown: content.value,
     html: html.value
   }
-  await posts.createPost(newPost)
-  router.push('/')
+  emit('submit', newPost)
 }
 </script>
 
