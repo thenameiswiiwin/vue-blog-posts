@@ -19,6 +19,16 @@ app.get('/posts', (req, res) => {
   res.json(allPosts)
 })
 
+app.put<{}, {}, Post>('/posts', (req: Request, res: Response) => {
+  const index = allPosts.findIndex((post) => post.id === req.body.id)
+  if (index === -1) {
+    throw Error(`Post with id ${req.body.id} not found`)
+  }
+  const existingPost = allPosts[index]
+  allPosts[index] = { ...existingPost, ...req.body }
+  return res.json(allPosts[index])
+})
+
 app.post<{}, {}, Post>('/posts', (req: Request, res: Response) => {
   const post = { ...req.body, id: (Math.random() * 100000).toFixed() }
   allPosts.push(post)

@@ -46,6 +46,17 @@ export const usePostsStores = defineStore('posts', {
       this.all = all
     },
 
+    createPost(post: Post) {
+      const body = JSON.stringify(post)
+      return window.fetch('/api/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body
+      })
+    },
+
     updatePost(post: Post) {
       const body = JSON.stringify(post)
       return window.fetch('/api/posts', {
