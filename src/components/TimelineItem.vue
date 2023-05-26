@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex gap-x-4">
+  <RouterLink :to="`/posts/${post.id}`" class="flex gap-x-4">
     <div class="min-w-0 flex-auto">
       <p class="text-sm font-semibold leading-6 text-gray-900">
         <a>
@@ -16,10 +16,8 @@ defineProps<{
         </a>
       </p>
       <p class="mt-1 flex text-xs leading-5 text-gray-500">
-        <a class="relative truncate hover:underline">
-          {{ post.created.toFormat('MMMM dd, yyyy') }}
-        </a>
+        {{ post.created.toFormat('MMMM dd, yyyy') }}
       </p>
     </div>
-  </div>
+  </RouterLink>
 </template>

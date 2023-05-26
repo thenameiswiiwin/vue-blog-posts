@@ -13,5 +13,6 @@ const post: TimelinePost = {
 </script>
 
 <template>
+  <h2 class="text-base font-semibold leading-7 text-gray-900">New Post</h2>
   <PostWriter :post="post" />
 </template>

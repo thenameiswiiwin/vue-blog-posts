@@ -1,7 +1,7 @@
 # TODO
 
 ## [] Authorization
-- [] navigation guard
+- [x] navigation guard
 - [] user authorization
 ## [] Features
 - [] showing posts

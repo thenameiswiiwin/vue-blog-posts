@@ -4,12 +4,12 @@ import { marked } from 'marked'
 import hljs from 'highlight.js'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'vue-router'
-import type { TimelinePost } from '@/utils/posts'
+import type { Post, TimelinePost } from '@/utils/posts'
 import { usePostsStores } from '@/stores/postsStores'
 import Button from './Button.vue'
 
 const props = defineProps<{
-  post: TimelinePost
+  post: TimelinePost | Post
 }>()
 
 const title = ref(props.post.title)
@@ -74,10 +74,6 @@ async function handleClick() {
   <div>
     <div>
       <div class="border-b border-gray-900/10 pb-12">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">
-          New Post
-        </h2>
-
         <div class="mt-6 flex flex-col gap-x-6 gap-y-8">
           <div>
             <label
