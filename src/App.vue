@@ -1,11 +1,6 @@
 <script lang="ts" setup>
 import NavBar from '@/components/NavBar.vue'
 import Modal from '@/components/Modal.vue'
-import { useUsers } from './stores/usersStore'
-
-const usersStore = useUsers()
-
-usersStore.authenticate()
 </script>
 
 <template>
